@@ -19,6 +19,7 @@ func Execute(){
 	updateCmd.Flags().StringP("category", "c", "", "Category of the expense to update")
 
 	listCmd := &cobra.Command{ Use: "list", Short: "", Run: ListExpenses }
+	listCmd.Flags().StringP("category", "c", "", "Category of the expenses to list")
 
 	summaryCmd := &cobra.Command{ Use: "summary", Short: "", Run: ExpensesSummary }
 	summaryCmd.Flags().Int64P("month", "m", 0, "Month to get an expense summary of.")

@@ -22,10 +22,18 @@ func ListExpenses(cmd *cobra.Command, args []string){
 		panic(err)
 	}
 
+	category, err := cmd.Flags().GetString("category")
+	if err != nil{
+		panic(err)
+	}
+
 	cliWriter := tabwriter.NewWriter(os.Stdout, 1, 1, 4, ' ', 0)
 	defer cliWriter.Flush()
-	for _, record := range records{
+	for i, record := range records{
 		var output string = ""
+		if category != "" && category != record[3] && i != 0{
+			continue
+		}
 		for _, val := range record{
 			output += fmt.Sprintf("%v\t", val)
 		}
